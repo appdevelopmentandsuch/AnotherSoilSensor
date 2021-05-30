@@ -42,6 +42,11 @@ ArduinoMQTTClient Version 0.1.5
 
 AnotherSoilSensor is designed to be easy to setup and use. Without any prior configuration, you should be able to flash a device and use immediately.
 
+**NOTE**
+The data produced for consumption by either the REST API or the MQTT Broker is represented as a percentage, from 0% - 100%. These values used for determining the mositure percentage are stored in `constants.h` as `VALUE_AIR` and `VALUE_WATER`, where `VALUE_AIR` is the value read from the sensor when it is exposed to air, and `VALUE_WATER` is the value read from the sensor when it is almost completely submerged.
+
+These values were determined through experimentation with an example project in the Arduino IDE library. If the set values are not representative of your device, run an Analog Input example on your device and observe the output to acquire the corresponding values.
+
 Once flashed, using a computer with Postman, open up your WiFi settings and find the network `AnotherSoilSensor` which you can login to using the **password** `password`.
 
 Once connected to the network `AnotherSoilSensor`, in Postman, configure the below JSON body and send:
