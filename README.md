@@ -11,9 +11,9 @@ Soil Moisture Logger using NodeMCU, Capacitive Soil Mosutre Sensor v1.2, sending
 | <img src="https://user-images.githubusercontent.com/73759882/120107299-2f373f80-c126-11eb-969a-d285b51d4b6e.jpg" alt="Capacitive Soil Moisture Sensor v1.2" width="200"/> | <img src="https://user-images.githubusercontent.com/22528729/105792624-5a7a0a00-5f4d-11eb-8d6b-925c647c68b1.jpg" alt="NodeMCU" width="200"/> |
 |              [Buy Capacitive Soil Moisture Sensor v1.2 on Amazon (CA)](https://www.amazon.ca/Gikfun-Capacitive-Corrosion-Resistant-Detection/dp/B07H3P1NRM)               |           [Buy NodeMCU 12E on Amazon (CA)](https://www.amazon.ca/KeeYees-Internet-Development-Wireless-Compatible/dp/B07S5Z3VYZ/)            |
 
-<!-- ## Wiring
+## Wiring
 
-<img src="https://user-images.githubusercontent.com/22528729/118985613-356a3680-b944-11eb-891d-28da8cf00c29.png" alt="Wiring" width="200"/> -->
+<img src="https://user-images.githubusercontent.com/22528729/120115959-6ff57f80-c14b-11eb-9ac0-5149d37bce63.png" alt="Wiring" width="200"/>
 
 ## Quick Start
 
