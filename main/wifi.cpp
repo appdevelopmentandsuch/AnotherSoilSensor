@@ -22,7 +22,7 @@ void handleWifiSetup() {
   const char* pass = settings[JSON_KEY_WIFI_PASS]; 
 
   while(!WiFi.disconnect()) {
-    delay(SETUP_DELAY);
+    delay(DELAY_SETUP);
   }
 
   if(ssid != "" && pass != "") {
@@ -31,7 +31,7 @@ void handleWifiSetup() {
 
     uint tries = 0;
       while (!isConnected() && tries < WIFI_MAX_TRIES) {
-        delay(SETUP_DELAY);
+        delay(DELAY_SETUP);
         tries += 1;
       }
 

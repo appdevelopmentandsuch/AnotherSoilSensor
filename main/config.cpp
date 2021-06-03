@@ -5,7 +5,7 @@
 #include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
 
-ESP8266WebServer configServer(80);
+ESP8266WebServer configServer(WEB_SERVER_PORT);
 
 bool validExpectedService(DynamicJsonDocument doc, int service) {
     if (doc.containsKey(JSON_KEY_SERVICE_CONFIG)) {
@@ -35,11 +35,20 @@ bool validRESTConfig(DynamicJsonDocument doc) {
         validExpectedService(doc, OPTION_REST);
 }
 
+bool validMQTTUpdateInterval(DynamicJsonDocument doc) {
+    if(doc.containsKey(JSON_KEY_MQTT_UPDATE_INTERVAL)) {
+        int mqttUpdateInterval = doc[JSON_KEY_MQTT_UPDATE_INTERVAL];
+        return mqttUpdateInterval >= MQTT_MIN_UPDATE_INTERVAL;
+    }
+    return false;
+}
+
 bool validMQTTConfig(DynamicJsonDocument doc) {
     return doc.containsKey(JSON_KEY_MQTT_BROKER) &&
         doc.containsKey(JSON_KEY_MQTT_PORT) &&
         doc.containsKey(JSON_KEY_MQTT_USER) &&
         doc.containsKey(JSON_KEY_MQTT_PASS) &&
+        validMQTTUpdateInterval(doc) &&
         validExpectedService(doc, OPTION_MQTT);
 }
 
@@ -53,7 +62,7 @@ ICACHE_RAM_ATTR void resetConfig() {
 
     if(stored) {
         while(!WiFi.disconnect()) {
-            delay(100);
+            delay(DELAY_DISCONNECT);
         }
 
         detachInterrupt(digitalPinToInterrupt(BUTTON_INPUT));
@@ -91,15 +100,15 @@ void handleConfig() {
                 String response = String("{\n\t\"success\":true,\n\t\"identifier\":\"") + WiFi.macAddress() + String("\"}");
                 configServer.send(HTTP_OK, HTTP_TYPE_JSON, response);
                 
-                delay(SEND_DELAY); //Adding slight delay in order to send the response
+                delay(DELAY_SEND); //Adding slight delay in order to send the response
                 
                 configServer.close();
                 while(!WiFi.disconnect()) {
-                    delay(100);
+                    delay(DELAY_DISCONNECT);
                 }
 
                 while(!WiFi.softAPdisconnect(true)) {
-                    delay(100);
+                    delay(DELAY_DISCONNECT);
                 }
 
                 detachInterrupt(digitalPinToInterrupt(BUTTON_INPUT));

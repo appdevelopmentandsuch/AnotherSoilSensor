@@ -42,6 +42,8 @@ ArduinoMQTTClient Version 0.1.5
 
 AnotherSoilSensor is designed to be easy to setup and use. Without any prior configuration, you should be able to flash a device and use immediately.
 
+**NOTE** By default, AnotherSoilSensor does not display verbose output to the Serial Monitor for security purposes. If you wish to see verbose output of the device, you must got into `constants.h` and change `DEBUG` to `true`.
+
 **NOTE**
 The data produced for consumption by either the REST API or the MQTT Broker is represented as a percentage, from 0% - 100%. These values used for determining the mositure percentage are stored in `constants.h` as `VALUE_AIR` and `VALUE_WATER`, where `VALUE_AIR` is the value read from the sensor when it is exposed to air, and `VALUE_WATER` is the value read from the sensor when it is almost completely submerged.
 
@@ -60,6 +62,7 @@ Raw JSON Body
     "pass": "", //WiFi Password for connection
     "mqttBroker": "", //The IP address or hostname for an MQTT broker
     "mqttPort": 1883, //The port number of the MQTT broker
+    "mqttUpdateInterval": 5000, //The interval in which you would like the device to publish data to the MQTT broker, in milliseconds, minimum is 500 or 0.5 seconds
     "mqttUser":"", //A username for a valid MQTT user
     "mqttPass":"", //The password for the valid MQTT user
     "restUser":"", //The username you wish to use going forward to make authenticated requests to the device
@@ -94,6 +97,7 @@ Raw JSON Body
     "pass": "",
     "mqttBroker": "",
     "mqttPort": 1883,
+    "mqttUpdateInterval": 5000,
     "mqttUser":"",
     "mqttPass":"",
     "service": 2

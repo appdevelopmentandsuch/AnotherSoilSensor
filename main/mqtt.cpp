@@ -24,7 +24,7 @@ void handleMQTTSetup() {
   int tries = 0;
 
   while (!mqttClient.connect(mqttBroker, mqttPort) && tries < MQTT_MAX_TRIES) {
-    delay(SETUP_DELAY);
+    delay(DELAY_SETUP);
     tries += 1;
   }
 
@@ -48,5 +48,8 @@ void handleMQTT() {
   long moisture = readMoisture();
 
   sendMqttMessage(buildTopic(TOPIC_MOISTURE), String(moisture));
-  delay(LOOP_DELAY);
+  
+  DynamicJsonDocument settings = loadConfig();
+  int mqttUpdateInterval = settings[JSON_KEY_MQTT_UPDATE_INTERVAL];
+  delay(mqttUpdateInterval);
 }

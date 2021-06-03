@@ -30,7 +30,7 @@ bool sameConfig(DynamicJsonDocument doc1, DynamicJsonDocument doc2) {
 
 bool setDefaultServerConfig() {
   DynamicJsonDocument doc(DOC_SIZE);
-  char defaultConfig[] = "{\n\t\"ssid\": \"\",\n\t\"pass\": \"\",\n\t\"mqttBroker\": \"\",\n\t\"mqttPort\": 1883,\n\t\"mqttUser\":\"\",\n\t\"mqttPass\":\"\",\n\t\"restUser\":\"\",\n\t\"restPass\":\"\",\n\t\"service\": 0\n}";
+  char defaultConfig[] = "{\n\t\"ssid\": \"\",\n\t\"pass\": \"\",\n\t\"mqttBroker\": \"\",\n\t\"mqttPort\": 1883,\n\t\"mqttUser\":\"\",\n\t\"mqttPass\":\"\",\n\t\"mqttUpdateInterval\": 5000,\n\t\"restUser\":\"\",\n\t\"restPass\":\"\",\n\t\"service\": 0\n}";
   
   deserializeJson(doc, defaultConfig);
 
@@ -50,6 +50,7 @@ void printConfig(DynamicJsonDocument doc) {
   const char* pass = doc[JSON_KEY_WIFI_PASS];
   const char* mqttBroker = doc[JSON_KEY_MQTT_BROKER];
   int mqttPort = doc[JSON_KEY_MQTT_PORT];
+  int mqttUpdateInterval = doc[JSON_KEY_MQTT_UPDATE_INTERVAL];
   const char* mqttUser = doc[JSON_KEY_MQTT_USER];
   const char* mqttPass = doc[JSON_KEY_MQTT_PASS];
   const char* restUser = doc[JSON_KEY_REST_USER];
@@ -61,6 +62,7 @@ void printConfig(DynamicJsonDocument doc) {
   printMessage("pass: "); printlnMessage(String(pass));
   printMessage("mqttBroker: "); printlnMessage(String(mqttBroker));
   printMessage("mqttPort: "); printlnMessage(String(mqttPort));
+  printMessage("mqttUpdateInterval: "); printlnMessage(String(mqttUpdateInterval));
   printMessage("mqttUser: "); printlnMessage(String(mqttUser));
   printMessage("mqttPass: "); printlnMessage(String(mqttPass));
   printMessage("restUser: "); printlnMessage(String(restUser));

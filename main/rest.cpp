@@ -7,7 +7,7 @@
 #include <ESP8266WiFi.h>
 #include <string.h>
 
-ESP8266WebServer restServer(80);
+ESP8266WebServer restServer(WEB_SERVER_PORT);
 
 String version = VERSION;
 
