@@ -95,6 +95,10 @@ void handleConfig() {
         } else if(serviceConfig == OPTION_MQTT && !validMQTTConfig(doc)) {
             configServer.send(HTTP_BAD_REQUEST, HTTP_TYPE_JSON, HTTP_BAD_MQTT_CONFIG);
         } else {
+            if(!doc.containsKey(JSON_KEY_SENSOR_CONFIG)) {
+                doc[JSON_KEY_SENSOR_CONFIG] = SENSOR_CONFIG_SOIL;
+            }
+            
             bool stored = storeConfig(doc);
             if(stored) {
                 String response = String("{\n\t\"success\":true,\n\t\"identifier\":\"") + WiFi.macAddress() + String("\"}");

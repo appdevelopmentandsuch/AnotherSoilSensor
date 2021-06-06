@@ -3,7 +3,7 @@
 #include <string.h>
 #include <Arduino.h>
 
-#define DEBUG true
+#define DEBUG false
 
 #define SERIAL_FREQUENCY 115200
 
@@ -11,6 +11,8 @@
 #define DHT_TYPE DHT11
 
 #define MOISTURE_PIN A0
+
+#define BAD_READ -1
 
 #define VALUE_AIR 693
 #define VALUE_WATER 333

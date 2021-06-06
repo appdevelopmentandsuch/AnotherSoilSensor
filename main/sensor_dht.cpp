@@ -6,11 +6,19 @@
 float readTemperature() {
     DHT dht(DHT_PIN, DHT_TYPE);
     dht.begin();
-    return dht.readTemperature();
+    float temperature = dht.readTemperature();
+    if(isnan(temperature)) {
+        return BAD_READ;
+    }
+    return temperature;
 }
 
 float readHumidity() {
     DHT dht(DHT_PIN, DHT_TYPE);
     dht.begin();
-    return dht.readHumidity();
+    float humidity = dht.readHumidity();
+    if(isnan(humidity)) {
+        return BAD_READ;
+    }
+    return humidity;
 }
