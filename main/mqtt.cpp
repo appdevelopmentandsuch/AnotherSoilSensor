@@ -1,5 +1,6 @@
 #include "constants.h"
 #include "mqtt.h"
+#include "sensor_dht.h"
 #include "sensor_moisture.h"
 #include "utils.h"
 #include <ArduinoMqttClient.h>
@@ -45,11 +46,21 @@ void sendMqttMessage(String topic, String message) {
 
 void handleMQTT() {
   mqttClient.poll();
-  long moisture = readMoisture();
 
-  sendMqttMessage(buildTopic(TOPIC_MOISTURE), String(moisture));
-  
   DynamicJsonDocument settings = loadConfig();
+  int sensorConfig = settings[JSON_KEY_SENSOR_CONFIG];
+
+  long moisture = readMoisture();
+  sendMqttMessage(buildTopic(TOPIC_MOISTURE), String(moisture));
+
+  if(sensorConfig == SENSOR_CONFIG_SOIL_TEMP) {
+    float humidity = readHumidity();
+    float temperature = readTemperature();
+
+    sendMqttMessage(buildTopic(TOPIC_TEMPERATURE), String(temperature));
+    sendMqttMessage(buildTopic(TOPIC_HUMIDITY), String(humidity));
+  }
+  
   int mqttUpdateInterval = settings[JSON_KEY_MQTT_UPDATE_INTERVAL];
   delay(mqttUpdateInterval);
 }

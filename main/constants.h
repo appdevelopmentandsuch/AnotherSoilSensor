@@ -3,9 +3,12 @@
 #include <string.h>
 #include <Arduino.h>
 
-#define DEBUG false
+#define DEBUG true
 
 #define SERIAL_FREQUENCY 115200
+
+#define DHT_PIN D5
+#define DHT_TYPE DHT11
 
 #define MOISTURE_PIN A0
 
@@ -36,11 +39,16 @@
 #define OPTION_REST 1
 #define OPTION_MQTT 2
 
+#define SENSOR_CONFIG_SOIL 0
+#define SENSOR_CONFIG_SOIL_TEMP 1
+
 #define ADDRESS_CONFIG 0
 
 #define DOC_SIZE 1024
 
+#define TOPIC_HUMIDITY "humidity"
 #define TOPIC_MOISTURE "moisture"
+#define TOPIC_TEMPERATURE "temperature"
 
 #define DEFAULT_DEVICE_SSID "AnotherSoilSensor"
 #define DEFAULT_DEVICE_PASS "password"
@@ -55,13 +63,19 @@
 #define JSON_KEY_MQTT_PASS "mqttPass"
 #define JSON_KEY_REST_USER "restUser"
 #define JSON_KEY_REST_PASS "restPass"
+#define JSON_KEY_SENSOR_CONFIG "sensorConfig"
 
+#define JSON_KEY_TEMPERATURE "temperature"
+#define JSON_KEY_HUMIDITY "humidity"
 #define JSON_KEY_MOISTURE "moisture"
 #define JSON_KEY_IDENTIFIER "identifier"
 #define JSON_KEY_VERSION "version"
 
-#define ENDPOINT_READ_MOISTURE "/api/read/moisture/"
 #define ENDPOINT_INFO "/api/info/"
+#define ENDPOINT_READ_ALL "/api/read/all/"
+#define ENDPOINT_READ_HUMIDITY "/api/read/humidity/"
+#define ENDPOINT_READ_MOISTURE "/api/read/moisture/"
+#define ENDPOINT_READ_TEMPERATURE "/api/read/temperature/"
 
 #define ENDPOINT_CONFIG "/api/config/"
 

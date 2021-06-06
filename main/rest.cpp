@@ -1,5 +1,6 @@
 #include "constants.h"
 #include "rest.h"
+#include "sensor_dht.h"
 #include "sensor_moisture.h"
 #include "utils.h"
 #include <ArduinoJson.h>
@@ -32,6 +33,49 @@ void sendJSONResponse(DynamicJsonDocument doc) {
   restServer.send(HTTP_OK, HTTP_TYPE_JSON, response);
 }
 
+void handleReadAll() {
+  checkAuth();
+
+  DynamicJsonDocument doc(DOC_SIZE);
+
+  float humidity = readHumidity();
+  float temperature = readTemperature();
+  long moistureReading = readMoisture();
+
+  doc[JSON_KEY_MOISTURE] = moistureReading;
+  doc[JSON_KEY_TEMPERATURE] = temperature;
+  doc[JSON_KEY_HUMIDITY] = humidity;
+  doc[JSON_KEY_IDENTIFIER] = WiFi.macAddress();
+
+  sendJSONResponse(doc);
+}
+
+void handleReadTemperature() {
+  checkAuth();
+
+  DynamicJsonDocument doc(DOC_SIZE);
+
+  float temperature = readTemperature();
+
+  doc[JSON_KEY_TEMPERATURE] = temperature;
+  doc[JSON_KEY_IDENTIFIER] = WiFi.macAddress();
+
+  sendJSONResponse(doc);
+}
+
+void handleReadHumidity() {
+  checkAuth();
+
+  DynamicJsonDocument doc(DOC_SIZE);
+
+  float humidity = readHumidity();
+
+  doc[JSON_KEY_HUMIDITY] = humidity;
+  doc[JSON_KEY_IDENTIFIER] = WiFi.macAddress();
+
+  sendJSONResponse(doc);
+}
+
 void handleReadMoisture() {
   checkAuth();
 
@@ -57,6 +101,13 @@ void handleGetInfo() {
 }
 
 void handleServerSetup() {
+  DynamicJsonDocument settings = loadConfig();
+  int sensorConfig = settings[JSON_KEY_SENSOR_CONFIG];
+  if(sensorConfig == SENSOR_CONFIG_SOIL_TEMP) {
+    restServer.on(ENDPOINT_READ_ALL, handleReadAll);
+    restServer.on(ENDPOINT_READ_TEMPERATURE, handleReadTemperature);
+    restServer.on(ENDPOINT_READ_HUMIDITY, handleReadHumidity);
+  }
   restServer.on(ENDPOINT_READ_MOISTURE, handleReadMoisture);
   restServer.on(ENDPOINT_INFO, handleGetInfo);
   restServer.begin();
