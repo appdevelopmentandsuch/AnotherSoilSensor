@@ -1,6 +1,14 @@
 # AnotherSoilSensor
 
 [![CodeFactor](https://www.codefactor.io/repository/github/appdevelopmentandsuch/anothersoilsensor/badge)](https://www.codefactor.io/repository/github/appdevelopmentandsuch/anothersoilsensor)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/graphs/commit-activity)
+[![GitHub license](https://img.shields.io/github/license/appdevelopmentandsuch/AnotherSoilSensor.svg)](https://github.com/appdevelopmentandsuch/AnotherSoilSensor/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/appdevelopmentandsuch/AnotherSoilSensor.svg)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/releases/)
+[![GitHub tag](https://img.shields.io/github/tag/appdevelopmentandsuch/AnotherSoilSensor.svg)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/tags/)
+[![Github all releases](https://img.shields.io/github/downloads/appdevelopmentandsuch/AnotherSoilSensor/total.svg)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/releases/)
+[![GitHub stars](https://img.shields.io/github/stars/appdevelopmentandsuch/AnotherSoilSensor.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/stargazers/)
+[![GitHub issues](https://img.shields.io/github/issues/appdevelopmentandsuch/AnotherSoilSensor.svg)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/appdevelopmentandsuch/AnotherSoilSensor.svg)](https://GitHub.com/appdevelopmentandsuch/AnotherSoilSensor/issues?q=is%3Aissue+is%3Aclosed)
 
 Soil Moisture Logger using NodeMCU, Capacitive Soil Mosutre Sensor v1.2, sending data either using MQTT, or pulling directly from device's REST API
 
